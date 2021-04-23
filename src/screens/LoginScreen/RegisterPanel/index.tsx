@@ -5,7 +5,7 @@ import {Button, Input} from 'react-native-elements';
 import Color from '../../../configs/colors.enum';
 import useHooks from './hooks';
 
-const LoginPanel: React.FC = () => {
+const RegisterPanel: React.FC = () => {
   const {states, handlers} = useHooks();
   const passwordInputRef = useRef<TextInput>();
   const {control} = states;
@@ -13,7 +13,7 @@ const LoginPanel: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <View>
+      {/* <View>
         <Controller
           name="email"
           control={control}
@@ -55,7 +55,7 @@ const LoginPanel: React.FC = () => {
         containerStyle={styles.buttonContainer}
         buttonStyle={styles.button}
         onPress={handleSubmit(handleLogin)}
-      />
+      /> */}
     </View>
   );
 };
@@ -90,5 +90,4 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
 });
-
-export default LoginPanel;
+export default RegisterPanel;

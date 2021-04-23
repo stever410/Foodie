@@ -5,6 +5,7 @@ import {Props} from '../../../App';
 import Color from '../../configs/colors.enum';
 import useHooks from './hooks';
 import LoginPanel from './LoginPanel';
+import RegisterPanel from './RegisterPanel';
 
 const windowHeight = Dimensions.get('window').height;
 
@@ -30,7 +31,7 @@ const LoginScreen: React.FC<Props> = (props: Props) => {
           selectedIndex={selectedButtonIndex}
         />
       </View>
-      <LoginPanel />
+      {selectedButtonIndex === 0 ? <LoginPanel /> : <RegisterPanel />}
     </View>
   );
 };
