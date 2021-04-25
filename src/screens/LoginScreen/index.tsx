@@ -2,7 +2,7 @@ import React from 'react';
 import {Dimensions, Image, StyleSheet, View} from 'react-native';
 import {ButtonGroup} from 'react-native-elements';
 import {Props} from '../../../App';
-import Color from '../../configs/colors.enum';
+import Color from '../../constants/colors.enum';
 import useHooks from './hooks';
 import LoginPanel from './LoginPanel';
 import RegisterPanel from './RegisterPanel';

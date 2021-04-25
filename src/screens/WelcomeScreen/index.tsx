@@ -1,8 +1,9 @@
 import React from 'react';
 import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
-import Color from '../../configs/colors.enum';
+import Color from '../../constants/colors.enum';
 import {Button} from 'react-native-elements';
 import {Props} from '../../../App';
+
 const windowWidth = Dimensions.get('window').width;
 
 const WelcomeScreen: React.FC<Props> = (props: Props) => {
