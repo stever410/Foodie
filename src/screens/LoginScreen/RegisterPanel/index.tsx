@@ -13,8 +13,8 @@ const RegisterPanel: React.FC = () => {
   const {states, handlers} = useHooks();
   const passwordInputRef = useRef<TextInput>();
   const confirmPasswordInputRef = useRef<TextInput>();
-  const {control} = states;
-  const {handleSubmit, handleRegister} = handlers;
+  const {control, validationRules, errors} = states;
+  const {handleSubmit, handleRegister, handleErrors} = handlers;
 
   return (
     <View>
@@ -24,13 +24,14 @@ const RegisterPanel: React.FC = () => {
             name="firstName"
             control={control}
             defaultValue=""
-            rules={{
-              required: true,
-            }}
+            rules={validationRules.firstName}
             render={({field}) => (
               <Input
                 label="First Name"
                 labelStyle={styles.label}
+                errorMessage={errors.firstName?.message}
+                errorStyle={styles.error}
+                renderErrorMessage={!!errors.firstName}
                 value={field.value}
                 onChangeText={text => field.onChange(text)}
                 onSubmitEditing={() => passwordInputRef.current?.focus()}
@@ -43,13 +44,14 @@ const RegisterPanel: React.FC = () => {
             name="lastName"
             control={control}
             defaultValue=""
-            rules={{
-              required: true,
-            }}
+            rules={validationRules.lastName}
             render={({field}) => (
               <Input
                 label="Last Name"
                 labelStyle={styles.label}
+                errorMessage={errors.lastName?.message}
+                errorStyle={styles.error}
+                renderErrorMessage={!!errors.lastName}
                 value={field.value}
                 onChangeText={text => field.onChange(text)}
                 onSubmitEditing={() => passwordInputRef.current?.focus()}
@@ -62,13 +64,14 @@ const RegisterPanel: React.FC = () => {
             name="email"
             control={control}
             defaultValue=""
-            rules={{
-              required: true,
-            }}
+            rules={validationRules.email}
             render={({field}) => (
               <Input
                 label="Email Address"
                 labelStyle={styles.label}
+                renderErrorMessage={!!errors.email}
+                errorMessage={errors.email?.message}
+                errorStyle={styles.error}
                 value={field.value}
                 onChangeText={text => field.onChange(text)}
                 onSubmitEditing={() => passwordInputRef.current?.focus()}
@@ -81,13 +84,16 @@ const RegisterPanel: React.FC = () => {
             name="password"
             control={control}
             defaultValue=""
-            rules={{required: true}}
+            rules={validationRules.password}
             render={({field}) => (
               <Input
                 secureTextEntry
                 inputStyle={styles.input}
                 label="Password"
                 labelStyle={styles.label}
+                errorMessage={errors.password?.message}
+                errorStyle={styles.error}
+                renderErrorMessage={!!errors.password}
                 onChangeText={text => field.onChange(text)}
                 value={field.value}
                 onSubmitEditing={() => confirmPasswordInputRef.current?.focus()}
@@ -100,13 +106,16 @@ const RegisterPanel: React.FC = () => {
             name="confirmPassword"
             control={control}
             defaultValue=""
-            rules={{required: true}}
+            rules={validationRules.confirmPassword}
             render={({field}) => (
               <Input
                 secureTextEntry
                 inputStyle={styles.input}
                 label="Confirm Password"
                 labelStyle={styles.label}
+                errorMessage={errors.confirmPassword?.message}
+                errorStyle={styles.error}
+                renderErrorMessage={!!errors.confirmPassword}
                 onChangeText={text => field.onChange(text)}
                 value={field.value}
               />
@@ -118,7 +127,7 @@ const RegisterPanel: React.FC = () => {
         title="Register"
         containerStyle={styles.buttonContainer}
         buttonStyle={styles.button}
-        onPress={handleSubmit(handleRegister)}
+        onPress={handleSubmit(handleRegister, handleErrors)}
       />
     </View>
   );
@@ -147,6 +156,12 @@ const styles = StyleSheet.create({
     color: '#000',
     opacity: 4 / 10,
     fontSize: 15,
+  },
+  error: {
+    fontFamily: 'SF-Pro-Text-Semibold',
+    fontSize: 12,
+    color: Color.Orange1,
+    marginBottom: 20,
   },
   input: {
     fontFamily: 'SF-Pro-Text-Semibold',

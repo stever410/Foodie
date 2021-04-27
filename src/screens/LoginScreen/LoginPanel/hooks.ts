@@ -1,4 +1,4 @@
-import {useForm} from 'react-hook-form';
+import {SubmitHandler, useForm} from 'react-hook-form';
 import {ToastAndroid} from 'react-native';
 import AuthService from '../../../api/AuthService';
 
@@ -10,7 +10,7 @@ export type LoginFormData = {
 const useHooks = () => {
   const {handleSubmit, control} = useForm<LoginFormData>();
 
-  const handleLogin = async (userLoginInfo: LoginFormData) => {
+  const handleLogin: SubmitHandler<LoginFormData> = async userLoginInfo => {
     try {
       const {data} = await AuthService.login(userLoginInfo);
       ToastAndroid.show(data.id, ToastAndroid.SHORT);
