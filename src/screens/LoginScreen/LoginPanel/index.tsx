@@ -3,12 +3,12 @@ import {Controller} from 'react-hook-form';
 import {Dimensions, StyleSheet, Text, TextInput, View} from 'react-native';
 import {Button, Input} from 'react-native-elements';
 import Color from '../../../constants/colors.enum';
-import useHooks from './hooks';
+import useHooks, {Props} from './hooks';
 
 const windowWidth = Dimensions.get('window').width;
 
-const LoginPanel: React.FC = () => {
-  const {states, handlers} = useHooks();
+const LoginPanel: React.FC<Props> = (props: Props) => {
+  const {states, handlers} = useHooks(props);
   const passwordInputRef = useRef<TextInput>();
   const {control} = states;
   const {handleSubmit, handleLogin} = handlers;

@@ -1,7 +1,8 @@
+import {StackNavigationProp} from '@react-navigation/stack';
 import React from 'react';
 import {Dimensions, Image, StyleSheet, View} from 'react-native';
 import {ButtonGroup} from 'react-native-elements';
-import {Props} from '../../../App';
+import {RootStackParamList} from '../../common/types/RootStackParamListType';
 import Color from '../../constants/colors.enum';
 import useHooks from './hooks';
 import LoginPanel from './LoginPanel';
@@ -9,8 +10,12 @@ import RegisterPanel from './RegisterPanel';
 
 const windowHeight = Dimensions.get('window').height;
 
+interface Props {
+  navigation: StackNavigationProp<RootStackParamList>;
+}
+
 const LoginScreen: React.FC<Props> = (props: Props) => {
-  const {states, handlers} = useHooks(props);
+  const {states, handlers} = useHooks();
   const {buttons, selectedButtonIndex} = states;
   const {handleChangeTab} = handlers;
   return (
@@ -25,13 +30,17 @@ const LoginScreen: React.FC<Props> = (props: Props) => {
           textStyle={styles.buttonGroupText}
           selectedButtonStyle={styles.selectedButton}
           selectedTextStyle={styles.buttonGroupText}
-          innerBorderStyle={{width: 0}}
+          innerBorderStyle={styles.buttonGroupInnerBorderStyle}
           buttons={buttons}
           onPress={handleChangeTab}
           selectedIndex={selectedButtonIndex}
         />
       </View>
-      {selectedButtonIndex === 0 ? <LoginPanel /> : <RegisterPanel />}
+      {selectedButtonIndex === 0 ? (
+        <LoginPanel navigation={props.navigation} />
+      ) : (
+        <RegisterPanel />
+      )}
     </View>
   );
 };
@@ -70,6 +79,9 @@ const styles = StyleSheet.create({
   buttonGroupText: {
     fontFamily: 'SF-Pro-Text-Semibold',
     color: '#000',
+  },
+  buttonGroupInnerBorderStyle: {
+    width: 0,
   },
   selectedButton: {
     backgroundColor: 'transparent',

@@ -8,8 +8,8 @@ import {
   useForm,
 } from 'react-hook-form';
 import {ToastAndroid} from 'react-native';
-import {isEmail} from '../../../utils/useValidation';
 import AuthService from '../../../api/AuthService';
+import {isEmail} from '../../../hooks/useValidation';
 
 export type RegisterFormData = {
   firstName: string;

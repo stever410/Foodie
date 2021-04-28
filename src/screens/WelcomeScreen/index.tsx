@@ -2,9 +2,13 @@ import React from 'react';
 import {Dimensions, Image, StyleSheet, Text, View} from 'react-native';
 import Color from '../../constants/colors.enum';
 import {Button} from 'react-native-elements';
-import {Props} from '../../../App';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootStackParamList} from '../../common/types/RootStackParamListType';
 
 const windowWidth = Dimensions.get('window').width;
+interface Props {
+  navigation: StackNavigationProp<RootStackParamList>;
+}
 
 const WelcomeScreen: React.FC<Props> = (props: Props) => {
   const {navigation} = props;
@@ -33,7 +37,7 @@ const WelcomeScreen: React.FC<Props> = (props: Props) => {
         containerStyle={styles.buttonContainer}
         buttonStyle={styles.button}
         titleStyle={{color: Color.Orange}}
-        onPress={() => navigation.navigate('Login')}
+        onPress={() => navigation.navigate('Login', {})}
       />
     </View>
   );

@@ -1,4 +1,4 @@
-export type JwtResponse = {
+export type UserToken = {
   id: string;
   token: string;
   type: string;

@@ -1,5 +1,5 @@
 import {AxiosResponse} from 'axios';
-import {JwtResponse} from '../../dto/JwtResponse';
+import {UserToken} from '../../dto/UserToken';
 import {SuccessResponse} from '../../dto/SuccessResponse';
 import axios from '../../helpers/axios';
 import {LoginFormData} from '../../screens/LoginScreen/LoginPanel/hooks';
@@ -9,7 +9,7 @@ const AuthService = {
   async login({
     email,
     password,
-  }: LoginFormData): Promise<AxiosResponse<JwtResponse>> {
+  }: LoginFormData): Promise<AxiosResponse<UserToken>> {
     return await axios.post('/auth/login', {
       username: email,
       password,

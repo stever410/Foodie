@@ -1,14 +1,9 @@
 import {useState} from 'react';
 import {Props} from '../../../App';
 
-const useHooks = (props: Props) => {
-  const {navigation} = props;
+const useHooks = () => {
   const buttons = ['Login', 'Sign-up'];
   const [selectedButtonIndex, setSelectedButtonIndex] = useState(0);
-
-  const handleBackToWelcome = () => {
-    navigation.navigate('Welcome');
-  };
 
   const handleChangeTab = (selectedIndex: number) => {
     setSelectedButtonIndex(selectedIndex);
@@ -20,7 +15,6 @@ const useHooks = (props: Props) => {
       selectedButtonIndex,
     },
     handlers: {
-      handleBackToWelcome,
       handleChangeTab,
     },
   };
