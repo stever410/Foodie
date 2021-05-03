@@ -3,7 +3,7 @@ import {SubmitHandler, useForm} from 'react-hook-form';
 import {ToastAndroid} from 'react-native';
 import AuthService from '../../../api/AuthService';
 import AuthContext from '../../../context/AuthContext';
-import useToken from '../../../utils/TokenUtils';
+import {saveToken} from '../../../utils/TokenUtils';
 
 export type LoginFormData = {
   email: string;
@@ -11,7 +11,6 @@ export type LoginFormData = {
 };
 
 const useHooks = () => {
-  const {saveToken} = useToken();
   const {handleSubmit, control} = useForm<LoginFormData>();
   const {setUserToken} = useContext(AuthContext);
 
