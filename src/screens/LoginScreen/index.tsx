@@ -1,8 +1,6 @@
-import {StackNavigationProp} from '@react-navigation/stack';
 import React from 'react';
 import {Dimensions, Image, StyleSheet, View} from 'react-native';
 import {ButtonGroup} from 'react-native-elements';
-import {RootStackParamList} from '../../common/types/RootStackParamListType';
 import Color from '../../constants/colors.enum';
 import useHooks from './hooks';
 import LoginPanel from './LoginPanel';
@@ -10,11 +8,7 @@ import RegisterPanel from './RegisterPanel';
 
 const windowHeight = Dimensions.get('window').height;
 
-interface Props {
-  navigation: StackNavigationProp<RootStackParamList>;
-}
-
-const LoginScreen: React.FC<Props> = (props: Props) => {
+const LoginScreen: React.FC = () => {
   const {states, handlers} = useHooks();
   const {buttons, selectedButtonIndex} = states;
   const {handleChangeTab} = handlers;
@@ -36,11 +30,7 @@ const LoginScreen: React.FC<Props> = (props: Props) => {
           selectedIndex={selectedButtonIndex}
         />
       </View>
-      {selectedButtonIndex === 0 ? (
-        <LoginPanel navigation={props.navigation} />
-      ) : (
-        <RegisterPanel />
-      )}
+      {selectedButtonIndex === 0 ? <LoginPanel /> : <RegisterPanel />}
     </View>
   );
 };

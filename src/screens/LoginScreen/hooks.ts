@@ -1,5 +1,4 @@
 import {useState} from 'react';
-import {Props} from '../../../App';
 
 const useHooks = () => {
   const buttons = ['Login', 'Sign-up'];

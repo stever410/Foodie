@@ -1,15 +1,14 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import {Controller} from 'react-hook-form';
-import {Dimensions, StyleSheet, Text, TextInput, View} from 'react-native';
+import {Dimensions, StyleSheet, Text, View} from 'react-native';
 import {Button, Input} from 'react-native-elements';
 import Color from '../../../constants/colors.enum';
-import useHooks, {Props} from './hooks';
+import useHooks from './hooks';
 
 const windowWidth = Dimensions.get('window').width;
 
-const LoginPanel: React.FC<Props> = (props: Props) => {
-  const {states, handlers} = useHooks(props);
-  const passwordInputRef = useRef<TextInput>();
+const LoginPanel: React.FC = () => {
+  const {states, handlers} = useHooks();
   const {control} = states;
   const {handleSubmit, handleLogin} = handlers;
 
@@ -27,7 +26,6 @@ const LoginPanel: React.FC<Props> = (props: Props) => {
                 labelStyle={styles.label}
                 value={field.value}
                 onChangeText={text => field.onChange(text)}
-                onSubmitEditing={() => passwordInputRef.current?.focus()}
               />
             )}
           />
@@ -45,7 +43,6 @@ const LoginPanel: React.FC<Props> = (props: Props) => {
                 labelStyle={styles.label}
                 onChangeText={text => field.onChange(text)}
                 value={field.value}
-                ref={passwordInputRef}
               />
             )}
           />

@@ -1,19 +1,12 @@
-import {StackNavigationProp} from '@react-navigation/stack';
-import React from 'react';
+import React, {useContext} from 'react';
 import {Text, View} from 'react-native';
 import {Button} from 'react-native-elements';
-import {RootStackParamList} from '../../common/types/RootStackParamListType';
-import useToken from '../../hooks/useToken';
+import AuthContext from '../../context/AuthContext';
+import useToken from '../../utils/TokenUtils';
 
-export interface Props {
-  navigation: StackNavigationProp<RootStackParamList>;
-}
-
-const HomeScreen: React.FC<Props> = (props: Props) => {
-  const {
-    navigation: {navigate},
-  } = props;
+const HomeScreen: React.FC = () => {
   const {deleteToken} = useToken();
+  const {setUserToken} = useContext(AuthContext);
   return (
     <View>
       <Text>This is home screen</Text>
@@ -21,7 +14,7 @@ const HomeScreen: React.FC<Props> = (props: Props) => {
         title="Log out"
         onPress={async () => {
           await deleteToken();
-          navigate('Login', {});
+          setUserToken(null);
         }}
       />
     </View>

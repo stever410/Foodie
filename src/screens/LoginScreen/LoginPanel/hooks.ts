@@ -1,31 +1,25 @@
-import {StackNavigationProp} from '@react-navigation/stack';
+import {useContext} from 'react';
 import {SubmitHandler, useForm} from 'react-hook-form';
 import {ToastAndroid} from 'react-native';
 import AuthService from '../../../api/AuthService';
-import {RootStackParamList} from '../../../common/types/RootStackParamListType';
-import useToken from '../../../hooks/useToken';
+import AuthContext from '../../../context/AuthContext';
+import useToken from '../../../utils/TokenUtils';
 
 export type LoginFormData = {
   email: string;
   password: string;
 };
 
-export interface Props {
-  navigation: StackNavigationProp<RootStackParamList>;
-}
-
-const useHooks = (props: Props) => {
-  const {
-    navigation: {navigate},
-  } = props;
+const useHooks = () => {
   const {saveToken} = useToken();
   const {handleSubmit, control} = useForm<LoginFormData>();
+  const {setUserToken} = useContext(AuthContext);
 
   const handleLogin: SubmitHandler<LoginFormData> = async userLoginInfo => {
     try {
       const {data} = await AuthService.login(userLoginInfo);
       await saveToken(data);
-      navigate('Home', {});
+      setUserToken(data);
       ToastAndroid.show(data.id, ToastAndroid.SHORT);
     } catch (error) {
       ToastAndroid.show(error.response.data.message, ToastAndroid.SHORT);

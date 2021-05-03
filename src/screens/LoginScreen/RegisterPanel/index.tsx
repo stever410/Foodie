@@ -1,6 +1,12 @@
 import React, {useRef} from 'react';
 import {Controller} from 'react-hook-form';
-import {Dimensions, StyleSheet, TextInput, View} from 'react-native';
+import {
+  Dimensions,
+  KeyboardAvoidingView,
+  StyleSheet,
+  TextInput,
+  View,
+} from 'react-native';
 import {Button, Input} from 'react-native-elements';
 import {ScrollView} from 'react-native-gesture-handler';
 import Color from '../../../constants/colors.enum';
@@ -18,117 +24,121 @@ const RegisterPanel: React.FC = () => {
 
   return (
     <View>
-      <ScrollView style={styles.container}>
-        <View>
-          <Controller
-            name="firstName"
-            control={control}
-            defaultValue=""
-            rules={validationRules.firstName}
-            render={({field}) => (
-              <Input
-                label="First Name"
-                labelStyle={styles.label}
-                errorMessage={errors.firstName?.message}
-                errorStyle={styles.error}
-                renderErrorMessage={!!errors.firstName}
-                value={field.value}
-                onChangeText={text => field.onChange(text)}
-                onSubmitEditing={() => passwordInputRef.current?.focus()}
-              />
-            )}
-          />
-        </View>
-        <View>
-          <Controller
-            name="lastName"
-            control={control}
-            defaultValue=""
-            rules={validationRules.lastName}
-            render={({field}) => (
-              <Input
-                label="Last Name"
-                labelStyle={styles.label}
-                errorMessage={errors.lastName?.message}
-                errorStyle={styles.error}
-                renderErrorMessage={!!errors.lastName}
-                value={field.value}
-                onChangeText={text => field.onChange(text)}
-                onSubmitEditing={() => passwordInputRef.current?.focus()}
-              />
-            )}
-          />
-        </View>
-        <View>
-          <Controller
-            name="email"
-            control={control}
-            defaultValue=""
-            rules={validationRules.email}
-            render={({field}) => (
-              <Input
-                label="Email Address"
-                labelStyle={styles.label}
-                renderErrorMessage={!!errors.email}
-                errorMessage={errors.email?.message}
-                errorStyle={styles.error}
-                value={field.value}
-                onChangeText={text => field.onChange(text)}
-                onSubmitEditing={() => passwordInputRef.current?.focus()}
-              />
-            )}
-          />
-        </View>
-        <View>
-          <Controller
-            name="password"
-            control={control}
-            defaultValue=""
-            rules={validationRules.password}
-            render={({field}) => (
-              <Input
-                secureTextEntry
-                inputStyle={styles.input}
-                label="Password"
-                labelStyle={styles.label}
-                errorMessage={errors.password?.message}
-                errorStyle={styles.error}
-                renderErrorMessage={!!errors.password}
-                onChangeText={text => field.onChange(text)}
-                value={field.value}
-                onSubmitEditing={() => confirmPasswordInputRef.current?.focus()}
-              />
-            )}
-          />
-        </View>
-        <View>
-          <Controller
-            name="confirmPassword"
-            control={control}
-            defaultValue=""
-            rules={validationRules.confirmPassword}
-            render={({field}) => (
-              <Input
-                secureTextEntry
-                inputStyle={styles.input}
-                label="Confirm Password"
-                labelStyle={styles.label}
-                errorMessage={errors.confirmPassword?.message}
-                errorStyle={styles.error}
-                renderErrorMessage={!!errors.confirmPassword}
-                onChangeText={text => field.onChange(text)}
-                value={field.value}
-              />
-            )}
-          />
-        </View>
-      </ScrollView>
-      <Button
-        title="Register"
-        containerStyle={styles.buttonContainer}
-        buttonStyle={styles.button}
-        onPress={handleSubmit(handleRegister, handleErrors)}
-      />
+      <KeyboardAvoidingView>
+        <ScrollView style={styles.container}>
+          <View>
+            <Controller
+              name="firstName"
+              control={control}
+              defaultValue=""
+              rules={validationRules.firstName}
+              render={({field}) => (
+                <Input
+                  label="First Name"
+                  labelStyle={styles.label}
+                  errorMessage={errors.firstName?.message}
+                  errorStyle={styles.error}
+                  renderErrorMessage={!!errors.firstName}
+                  value={field.value}
+                  onChangeText={text => field.onChange(text)}
+                  onSubmitEditing={() => passwordInputRef.current?.focus()}
+                />
+              )}
+            />
+          </View>
+          <View>
+            <Controller
+              name="lastName"
+              control={control}
+              defaultValue=""
+              rules={validationRules.lastName}
+              render={({field}) => (
+                <Input
+                  label="Last Name"
+                  labelStyle={styles.label}
+                  errorMessage={errors.lastName?.message}
+                  errorStyle={styles.error}
+                  renderErrorMessage={!!errors.lastName}
+                  value={field.value}
+                  onChangeText={text => field.onChange(text)}
+                  onSubmitEditing={() => passwordInputRef.current?.focus()}
+                />
+              )}
+            />
+          </View>
+          <View>
+            <Controller
+              name="email"
+              control={control}
+              defaultValue=""
+              rules={validationRules.email}
+              render={({field}) => (
+                <Input
+                  label="Email Address"
+                  labelStyle={styles.label}
+                  renderErrorMessage={!!errors.email}
+                  errorMessage={errors.email?.message}
+                  errorStyle={styles.error}
+                  value={field.value}
+                  onChangeText={text => field.onChange(text)}
+                  onSubmitEditing={() => passwordInputRef.current?.focus()}
+                />
+              )}
+            />
+          </View>
+          <View>
+            <Controller
+              name="password"
+              control={control}
+              defaultValue=""
+              rules={validationRules.password}
+              render={({field}) => (
+                <Input
+                  secureTextEntry
+                  inputStyle={styles.input}
+                  label="Password"
+                  labelStyle={styles.label}
+                  errorMessage={errors.password?.message}
+                  errorStyle={styles.error}
+                  renderErrorMessage={!!errors.password}
+                  onChangeText={text => field.onChange(text)}
+                  value={field.value}
+                  onSubmitEditing={() =>
+                    confirmPasswordInputRef.current?.focus()
+                  }
+                />
+              )}
+            />
+          </View>
+          <View>
+            <Controller
+              name="confirmPassword"
+              control={control}
+              defaultValue=""
+              rules={validationRules.confirmPassword}
+              render={({field}) => (
+                <Input
+                  secureTextEntry
+                  inputStyle={styles.input}
+                  label="Confirm Password"
+                  labelStyle={styles.label}
+                  errorMessage={errors.confirmPassword?.message}
+                  errorStyle={styles.error}
+                  renderErrorMessage={!!errors.confirmPassword}
+                  onChangeText={text => field.onChange(text)}
+                  value={field.value}
+                />
+              )}
+            />
+          </View>
+        </ScrollView>
+        <Button
+          title="Register"
+          containerStyle={styles.buttonContainer}
+          buttonStyle={styles.button}
+          onPress={handleSubmit(handleRegister, handleErrors)}
+        />
+      </KeyboardAvoidingView>
     </View>
   );
 };
