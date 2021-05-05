@@ -1,23 +1,30 @@
-import React, {useContext} from 'react';
-import {Text, View} from 'react-native';
-import {Button} from 'react-native-elements';
-import AuthContext from '../../context/AuthContext';
-import {deleteToken} from '../../utils/TokenUtils';
+import {DrawerNavigationProp} from '@react-navigation/drawer';
+import React from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import {DrawerParamList} from '../../common/types/DrawerParamList';
+import Header from '../../components/Header';
 
-const HomeScreen: React.FC = () => {
-  const {setUserToken} = useContext(AuthContext);
+interface Props {
+  navigation: DrawerNavigationProp<DrawerParamList, 'Home'>;
+}
+
+const HomeScreen: React.FC<Props> = ({navigation}) => {
   return (
     <View>
-      <Text>This is home screen</Text>
-      <Button
-        title="Log out"
-        onPress={async () => {
-          await deleteToken();
-          setUserToken(null);
-        }}
-      />
+      <Header navigation={navigation} />
+      <Text style={styles.heading}>Delicious food for you</Text>
     </View>
   );
 };
 
 export default HomeScreen;
+
+const styles = StyleSheet.create({
+  heading: {
+    fontFamily: 'SF-Pro-Rounded-Bold',
+    fontSize: 34,
+    marginTop: 15,
+    width: 200,
+    marginLeft: 50,
+  },
+});
