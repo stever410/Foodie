@@ -1,62 +1,67 @@
-import {
-  DrawerContentComponentProps,
-  DrawerContentOptions,
-  DrawerContentScrollView,
-} from '@react-navigation/drawer';
+import {DrawerContentScrollView} from '@react-navigation/drawer';
 import React from 'react';
+import {StyleSheet, View} from 'react-native';
+import {Icon, ListItem} from 'react-native-elements';
+import Color from '../../constants/colors.enum';
+import useHooks, {Props} from './hooks';
 
-import {StyleSheet, Text, View} from 'react-native';
-import {Avatar, ListItem} from 'react-native-elements';
-
-interface Props {
-  props: DrawerContentComponentProps<DrawerContentOptions>;
-}
-
-const list = [
+const drawerItemsList = [
   {
-    name: 'Amy Farha',
-    avatar_url:
-      'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-    subtitle: 'Vice President',
+    name: 'Profile',
+    icon: 'account-circle-outline',
   },
   {
-    name: 'Chris Jackson',
-    avatar_url:
-      'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-    subtitle: 'Vice Chairman',
+    name: 'Orders',
+    icon: 'cart-arrow-down',
+  },
+  {
+    name: 'Promotions',
+    icon: 'tag-outline',
+  },
+  {
+    name: 'Privacy policy',
+    icon: 'file-document-outline',
+  },
+  {
+    name: 'Options',
+    icon: 'cog-outline',
   },
 ];
 
 const DrawerContent: React.FC<Props> = props => {
+  const {handlers} = useHooks(props);
+  const {handleLogOut} = handlers;
   return (
     <View style={styles.container}>
       <DrawerContentScrollView {...props}>
-        <View style={styles.headerContainer}>
-          <Avatar
-            containerStyle={styles.avatar}
-            size={60}
-            rounded
-            source={{
-              uri:
-                'https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80',
-            }}
-          />
-          <View style={{marginTop: 15}}>
-            <Text>Tommy Lannister</Text>
-            <Text>tommylan@foodie.com</Text>
-          </View>
-        </View>
         <View>
-          {list.map((l, i) => (
-            <ListItem key={i} bottomDivider>
-              <ListItem.Content>
-                <ListItem.Title>{l.name}</ListItem.Title>
-                <ListItem.Subtitle>{l.subtitle}</ListItem.Subtitle>
-              </ListItem.Content>
-            </ListItem>
+          {drawerItemsList.map(item => (
+            <>
+              <ListItem key={item.name} containerStyle={styles.bgTransparent}>
+                <Icon name={item.icon} type="material-community" color="#fff" />
+                <ListItem.Content>
+                  <ListItem.Title style={styles.listItemTitle}>
+                    {item.name}
+                  </ListItem.Title>
+                </ListItem.Content>
+              </ListItem>
+            </>
           ))}
         </View>
       </DrawerContentScrollView>
+      <View>
+        <ListItem
+          containerStyle={styles.bgTransparent}
+          underlayColor={Color.Gray1}
+          onPress={handleLogOut}>
+          <ListItem.Content>
+            <ListItem.Title style={styles.listItemTitle}>
+              Log out
+            </ListItem.Title>
+          </ListItem.Content>
+          <Icon name="arrow-right" type="material-community" color="#fff" />
+        </ListItem>
+      </View>
     </View>
   );
 };
@@ -66,6 +71,7 @@ export default DrawerContent;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: Color.Orange1,
   },
   avatar: {
     marginHorizontal: 15,
@@ -74,5 +80,13 @@ const styles = StyleSheet.create({
   headerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginBottom: 15,
+  },
+  listItemTitle: {
+    fontFamily: 'SF-Pro-Rounded-Semibold',
+    color: '#fff',
+  },
+  bgTransparent: {
+    backgroundColor: 'transparent',
   },
 });
