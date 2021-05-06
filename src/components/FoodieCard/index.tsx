@@ -1,21 +1,29 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  StyleProp,
+  ViewStyle,
+} from 'react-native';
 import {Image} from 'react-native-elements';
 import Color from '../../constants/colors.enum';
 
 interface Props {
-  title: string;
+  containerStyle?: StyleProp<ViewStyle>;
   description?: string;
   image?: string;
-  width?: number;
   height?: number;
+  width?: number;
+  title: string;
   onPress?: Function;
 }
 
 const FoodieCard: React.FC<Props> = props => {
-  const {title, description} = props;
+  const {title, description, containerStyle} = props;
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, containerStyle]}>
       <TouchableOpacity style={styles.card} activeOpacity={0.9}>
         <Image
           source={{
@@ -38,7 +46,7 @@ export default FoodieCard;
 
 const styles = StyleSheet.create({
   container: {
-    height: 320,
+    height: 300,
     width: 220,
     backgroundColor: 'transparent',
   },
@@ -46,7 +54,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    height: 270,
+    height: 240,
     width: 220,
     backgroundColor: '#fff',
     position: 'absolute',
@@ -59,7 +67,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-
     elevation: 5,
   },
   cardBody: {alignItems: 'center', marginTop: 60},

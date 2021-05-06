@@ -1,7 +1,8 @@
 import {DrawerNavigationProp} from '@react-navigation/drawer';
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Dimensions, StyleSheet, Text, View} from 'react-native';
 import {ButtonGroup, Icon, Input} from 'react-native-elements';
+import Carousel from 'react-native-snap-carousel';
 import {DrawerParamList} from '../../common/types/DrawerParamList';
 import FoodieCard from '../../components/FoodieCard';
 import Header from '../../components/Header';
@@ -12,10 +13,37 @@ interface Props {
   navigation: DrawerNavigationProp<DrawerParamList, 'Home'>;
 }
 
+const SLIDER_WIDTH = Dimensions.get('window').width;
+
+const mockData = [
+  {
+    title: 'Toast bread with blueberry',
+    description: '59.000 VND',
+  },
+  {
+    title: 'Toast bread with blueberry',
+    description: '59.000 VND',
+  },
+  {
+    title: 'Toast bread with blueberry',
+    description: '59.000 VND',
+  },
+];
 const HomeScreen: React.FC<Props> = ({navigation}) => {
   const {states, handlers} = useHooks();
   const {buttons, selectedButtonIndex} = states;
   const {handleChangeTab} = handlers;
+
+  const renderItem = ({item, index}) => {
+    return (
+      <FoodieCard
+        title={item.title}
+        description={item.description}
+        containerStyle={{marginVertical: 5}}
+      />
+    );
+  };
+
   return (
     <>
       <Header navigation={navigation} />
@@ -46,9 +74,12 @@ const HomeScreen: React.FC<Props> = ({navigation}) => {
           onPress={handleChangeTab}
         />
         <View style={styles.mt50}>
-          <FoodieCard
-            title="Toast bread with blueberry"
-            description="59.000 VND"
+          <Carousel
+            activeSlideAlignment="start"
+            data={mockData}
+            renderItem={renderItem}
+            sliderWidth={SLIDER_WIDTH}
+            itemWidth={220}
           />
         </View>
       </View>
