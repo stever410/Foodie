@@ -1,16 +1,21 @@
 import {DrawerNavigationProp} from '@react-navigation/drawer';
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {ButtonGroup, Icon, Input, Tab} from 'react-native-elements';
+import {ButtonGroup, Icon, Input} from 'react-native-elements';
 import {DrawerParamList} from '../../common/types/DrawerParamList';
+import FoodieCard from '../../components/FoodieCard';
 import Header from '../../components/Header';
 import Color from '../../constants/colors.enum';
+import useHooks from './hooks';
 
 interface Props {
   navigation: DrawerNavigationProp<DrawerParamList, 'Home'>;
 }
 
 const HomeScreen: React.FC<Props> = ({navigation}) => {
+  const {states, handlers} = useHooks();
+  const {buttons, selectedButtonIndex} = states;
+  const {handleChangeTab} = handlers;
   return (
     <>
       <Header navigation={navigation} />
@@ -33,12 +38,19 @@ const HomeScreen: React.FC<Props> = ({navigation}) => {
           containerStyle={styles.buttonGroupContainer}
           textStyle={styles.buttonGroupText}
           selectedButtonStyle={styles.selectedButton}
-          selectedTextStyle={styles.buttonGroupText}
+          selectedTextStyle={styles.buttonGroupSelectedText}
           innerBorderStyle={styles.buttonGroupInnerBorderStyle}
-          buttons={['Foods', 'Drink', 'Snacks']}
-          buttonStyle={{backgroundColor: 'transparent'}}
-          selectedIndex={0}
+          buttons={buttons}
+          buttonStyle={styles.buttonGroupButton}
+          selectedIndex={selectedButtonIndex}
+          onPress={handleChangeTab}
         />
+        <View style={styles.mt50}>
+          <FoodieCard
+            title="Toast bread with blueberry"
+            description="59.000 VND"
+          />
+        </View>
       </View>
     </>
   );
@@ -52,6 +64,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f2f2f2',
     marginHorizontal: 50,
   },
+  mt50: {marginTop: 50},
   heading: {
     fontFamily: 'SF-Pro-Rounded-Bold',
     fontSize: 34,
@@ -62,10 +75,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginVertical: 10,
-    backgroundColor: '#EFEEEE',
+    backgroundColor: '#fff',
     borderRadius: 30,
     height: 65,
-    borderWidth: 1,
   },
   inputInputContainer: {
     borderBottomWidth: 0,
@@ -79,8 +91,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   buttonGroupText: {
-    fontFamily: 'SF-Pro-Text-Semibold',
-    color: '#000',
+    fontFamily: 'SF-Pro-Text-Regular',
+    color: '#9A9A9D',
+    fontSize: 17,
+  },
+  buttonGroupSelectedText: {
+    fontFamily: 'SF-Pro-Text-Regular',
+    color: Color.Orange1,
   },
   buttonGroupInnerBorderStyle: {
     width: 0,
@@ -90,4 +107,5 @@ const styles = StyleSheet.create({
     borderBottomColor: Color.Orange1,
     borderBottomWidth: 3,
   },
+  buttonGroupButton: {backgroundColor: 'transparent'},
 });

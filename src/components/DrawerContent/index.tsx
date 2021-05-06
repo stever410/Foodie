@@ -20,16 +20,14 @@ const DrawerContent: React.FC<
       <DrawerContentScrollView {...props}>
         <View>
           {drawerItemsList.map(item => (
-            <>
-              <ListItem key={item.name} containerStyle={styles.bgTransparent}>
-                <Icon name={item.icon} type="material-community" color="#fff" />
-                <ListItem.Content>
-                  <ListItem.Title style={styles.listItemTitle}>
-                    {item.name}
-                  </ListItem.Title>
-                </ListItem.Content>
-              </ListItem>
-            </>
+            <ListItem key={item.name} containerStyle={styles.bgTransparent}>
+              <Icon name={item.icon} type="material-community" color="#fff" />
+              <ListItem.Content>
+                <ListItem.Title style={styles.listItemTitle}>
+                  {item.name}
+                </ListItem.Title>
+              </ListItem.Content>
+            </ListItem>
           ))}
         </View>
       </DrawerContentScrollView>
