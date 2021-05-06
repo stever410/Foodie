@@ -78,7 +78,6 @@ const styles = StyleSheet.create({
     borderBottomColor: Color.Orange1,
     borderBottomWidth: 3,
   },
-  loginButtonContainer: {},
   loginButton: {
     position: 'absolute',
   },

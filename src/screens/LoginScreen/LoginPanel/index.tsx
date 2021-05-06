@@ -23,7 +23,8 @@ const LoginPanel: React.FC = () => {
             render={({field}) => (
               <Input
                 label="Email Address"
-                labelStyle={styles.label}
+                labelStyle={[styles.label, styles.semiboldFont]}
+                inputStyle={styles.semiboldFont}
                 value={field.value}
                 onChangeText={text => field.onChange(text)}
               />
@@ -38,9 +39,9 @@ const LoginPanel: React.FC = () => {
             render={({field}) => (
               <Input
                 secureTextEntry
-                inputStyle={styles.input}
+                inputStyle={[styles.input, styles.semiboldFont]}
                 label="Password"
-                labelStyle={styles.label}
+                labelStyle={[styles.label, styles.semiboldFont]}
                 onChangeText={text => field.onChange(text)}
                 value={field.value}
               />
@@ -48,7 +49,9 @@ const LoginPanel: React.FC = () => {
           />
         </View>
         <View>
-          <Text style={styles.forgotPassword}>Forgot passcode ?</Text>
+          <Text style={[styles.forgotPassword, styles.semiboldFont]}>
+            Forgot passcode ?
+          </Text>
         </View>
       </View>
       <Button
@@ -80,20 +83,20 @@ const styles = StyleSheet.create({
     height: 70,
   },
   label: {
-    fontFamily: 'SF-Pro-Text-Semibold',
     color: '#000',
     opacity: 4 / 10,
     fontSize: 15,
   },
   input: {
-    fontFamily: 'SF-Pro-Text-Semibold',
     color: '#000',
     fontSize: 17,
   },
   forgotPassword: {
-    fontFamily: 'SF-Pro-Text-Semibold',
     color: Color.Orange1,
     marginLeft: 10,
+  },
+  semiboldFont: {
+    fontFamily: 'SF-Pro-Text-Semibold',
   },
 });
 

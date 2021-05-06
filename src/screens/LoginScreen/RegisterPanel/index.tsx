@@ -35,9 +35,10 @@ const RegisterPanel: React.FC = () => {
               render={({field}) => (
                 <Input
                   label="First Name"
-                  labelStyle={styles.label}
+                  labelStyle={[styles.label, styles.semiboldFont]}
                   errorMessage={errors.firstName?.message}
-                  errorStyle={styles.error}
+                  errorStyle={[styles.error, styles.semiboldFont]}
+                  inputStyle={styles.semiboldFont}
                   renderErrorMessage={!!errors.firstName}
                   value={field.value}
                   onChangeText={text => field.onChange(text)}
@@ -55,10 +56,11 @@ const RegisterPanel: React.FC = () => {
               render={({field}) => (
                 <Input
                   label="Last Name"
-                  labelStyle={styles.label}
+                  labelStyle={[styles.label, styles.semiboldFont]}
                   errorMessage={errors.lastName?.message}
-                  errorStyle={styles.error}
+                  errorStyle={[styles.error, styles.semiboldFont]}
                   renderErrorMessage={!!errors.lastName}
+                  inputStyle={styles.semiboldFont}
                   value={field.value}
                   onChangeText={text => field.onChange(text)}
                   onSubmitEditing={() => passwordInputRef.current?.focus()}
@@ -75,10 +77,11 @@ const RegisterPanel: React.FC = () => {
               render={({field}) => (
                 <Input
                   label="Email Address"
-                  labelStyle={styles.label}
+                  labelStyle={[styles.label, styles.semiboldFont]}
                   renderErrorMessage={!!errors.email}
                   errorMessage={errors.email?.message}
-                  errorStyle={styles.error}
+                  errorStyle={[styles.error, styles.semiboldFont]}
+                  inputStyle={styles.semiboldFont}
                   value={field.value}
                   onChangeText={text => field.onChange(text)}
                   onSubmitEditing={() => passwordInputRef.current?.focus()}
@@ -95,11 +98,11 @@ const RegisterPanel: React.FC = () => {
               render={({field}) => (
                 <Input
                   secureTextEntry
-                  inputStyle={styles.input}
+                  inputStyle={styles.semiboldFont}
                   label="Password"
-                  labelStyle={styles.label}
+                  labelStyle={[styles.label, styles.semiboldFont]}
                   errorMessage={errors.password?.message}
-                  errorStyle={styles.error}
+                  errorStyle={[styles.error, styles.semiboldFont]}
                   renderErrorMessage={!!errors.password}
                   onChangeText={text => field.onChange(text)}
                   value={field.value}
@@ -119,11 +122,11 @@ const RegisterPanel: React.FC = () => {
               render={({field}) => (
                 <Input
                   secureTextEntry
-                  inputStyle={styles.input}
+                  inputStyle={styles.semiboldFont}
                   label="Confirm Password"
-                  labelStyle={styles.label}
+                  labelStyle={[styles.label, styles.semiboldFont]}
                   errorMessage={errors.confirmPassword?.message}
-                  errorStyle={styles.error}
+                  errorStyle={[styles.error, styles.semiboldFont]}
                   renderErrorMessage={!!errors.confirmPassword}
                   onChangeText={text => field.onChange(text)}
                   value={field.value}
@@ -162,21 +165,21 @@ const styles = StyleSheet.create({
     height: 70,
   },
   label: {
-    fontFamily: 'SF-Pro-Text-Semibold',
     color: '#000',
     opacity: 4 / 10,
     fontSize: 15,
   },
   error: {
-    fontFamily: 'SF-Pro-Text-Semibold',
     fontSize: 12,
     color: Color.Orange1,
     marginBottom: 20,
   },
   input: {
-    fontFamily: 'SF-Pro-Text-Semibold',
     color: '#000',
     fontSize: 17,
+  },
+  semiboldFont: {
+    fontFamily: 'SF-Pro-Text-Semibold',
   },
 });
 export default RegisterPanel;

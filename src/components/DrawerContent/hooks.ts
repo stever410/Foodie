@@ -6,11 +6,30 @@ import {useContext} from 'react';
 import AuthContext from '../../context/AuthContext';
 import {deleteToken} from '../../utils/TokenUtils';
 
-export interface Props {
-  props: DrawerContentComponentProps<DrawerContentOptions>;
-}
+const drawerItemsList = [
+  {
+    name: 'Profile',
+    icon: 'account-circle-outline',
+  },
+  {
+    name: 'Orders',
+    icon: 'cart-arrow-down',
+  },
+  {
+    name: 'Promotions',
+    icon: 'tag-outline',
+  },
+  {
+    name: 'Privacy policy',
+    icon: 'file-document-outline',
+  },
+  {
+    name: 'Options',
+    icon: 'cog-outline',
+  },
+];
 
-const useHooks = (props: Props) => {
+const useHooks = (props: DrawerContentComponentProps<DrawerContentOptions>) => {
   const userContext = useContext(AuthContext);
 
   const handleLogOut = () => {
@@ -19,6 +38,9 @@ const useHooks = (props: Props) => {
   };
 
   return {
+    states: {
+      drawerItemsList,
+    },
     handlers: {
       handleLogOut,
     },

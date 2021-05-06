@@ -1,35 +1,19 @@
-import {DrawerContentScrollView} from '@react-navigation/drawer';
+import {
+  DrawerContentComponentProps,
+  DrawerContentOptions,
+  DrawerContentScrollView,
+} from '@react-navigation/drawer';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Icon, ListItem} from 'react-native-elements';
 import Color from '../../constants/colors.enum';
-import useHooks, {Props} from './hooks';
+import useHooks from './hooks';
 
-const drawerItemsList = [
-  {
-    name: 'Profile',
-    icon: 'account-circle-outline',
-  },
-  {
-    name: 'Orders',
-    icon: 'cart-arrow-down',
-  },
-  {
-    name: 'Promotions',
-    icon: 'tag-outline',
-  },
-  {
-    name: 'Privacy policy',
-    icon: 'file-document-outline',
-  },
-  {
-    name: 'Options',
-    icon: 'cog-outline',
-  },
-];
-
-const DrawerContent: React.FC<Props> = props => {
-  const {handlers} = useHooks(props);
+const DrawerContent: React.FC<
+  DrawerContentComponentProps<DrawerContentOptions>
+> = props => {
+  const {handlers, states} = useHooks(props);
+  const {drawerItemsList} = states;
   const {handleLogOut} = handlers;
   return (
     <View style={styles.container}>
