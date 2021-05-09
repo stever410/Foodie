@@ -4,7 +4,7 @@ import {Dimensions, StyleSheet, Text, View} from 'react-native';
 import {ButtonGroup, Icon, Input} from 'react-native-elements';
 import Carousel from 'react-native-snap-carousel';
 import {DrawerParamList} from '../../common/types/DrawerParamList';
-import FoodieCard from '../../components/FoodieCard';
+import FoodieCard, {FoodieCardProps} from '../../components/FoodieCard';
 import Header from '../../components/Header';
 import Color from '../../constants/colors.enum';
 import useHooks from './hooks';
@@ -19,14 +19,20 @@ const mockData = [
   {
     title: 'Toast bread with blueberry',
     description: '59.000 VND',
+    image:
+      'https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80',
   },
   {
-    title: 'Toast bread with blueberry',
-    description: '59.000 VND',
+    title: 'Summer salad',
+    description: '39.000 VND',
+    image:
+      'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80',
   },
   {
-    title: 'Toast bread with blueberry',
-    description: '59.000 VND',
+    title: 'Dim sum',
+    description: '29.000 VND',
+    image:
+      'https://images.unsplash.com/photo-1496116218417-1a781b1c416c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
   },
 ];
 const HomeScreen: React.FC<Props> = ({navigation}) => {
@@ -34,11 +40,12 @@ const HomeScreen: React.FC<Props> = ({navigation}) => {
   const {buttons, selectedButtonIndex} = states;
   const {handleChangeTab} = handlers;
 
-  const renderItem = ({item, index}) => {
+  const renderItem = ({item}: {item: FoodieCardProps}) => {
     return (
       <FoodieCard
         title={item.title}
         description={item.description}
+        image={item.image}
         containerStyle={{marginVertical: 5}}
       />
     );

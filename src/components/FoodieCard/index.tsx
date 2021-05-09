@@ -10,7 +10,7 @@ import {
 import {Image} from 'react-native-elements';
 import Color from '../../constants/colors.enum';
 
-interface Props {
+export interface FoodieCardProps {
   containerStyle?: StyleProp<ViewStyle>;
   description?: string;
   image?: string;
@@ -20,15 +20,14 @@ interface Props {
   onPress?: Function;
 }
 
-const FoodieCard: React.FC<Props> = props => {
-  const {title, description, containerStyle} = props;
+const FoodieCard: React.FC<FoodieCardProps> = props => {
+  const {title, description, image, containerStyle} = props;
   return (
     <View style={[styles.container, containerStyle]}>
       <TouchableOpacity style={styles.card} activeOpacity={0.9}>
         <Image
           source={{
-            uri:
-              'https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80',
+            uri: image,
           }}
           style={styles.image}
           containerStyle={styles.imageContainer}

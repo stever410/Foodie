@@ -8,7 +8,7 @@ import {
   useForm,
 } from 'react-hook-form';
 import {ToastAndroid} from 'react-native';
-import AuthService from '../../../api/AuthService';
+import UserService from '../../../api/UserService';
 import {isEmail} from '../../../utils/ValidationUtils';
 
 export type RegisterFormData = {
@@ -46,7 +46,7 @@ const useHooks = () => {
 
   const handleRegister: SubmitHandler<RegisterFormData> = async registerUserData => {
     try {
-      const {data} = await AuthService.register(registerUserData);
+      const {data} = await UserService.register(registerUserData);
       ToastAndroid.show(data.message, ToastAndroid.SHORT);
       reset();
     } catch (error) {
